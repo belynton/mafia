@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { UserRoom } from 'src/user-room/user-room.entity';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 
 export enum StatusType {
     OPEN = 'USER',
@@ -19,7 +20,11 @@ export class Room {
   status: StatusType;
 
   @Column({
-    name: "player_count"
+    name: "player_count",
+    nullable: true,
   })
   playerCount: number;
+
+  @OneToMany(() => UserRoom, (userRoom) => userRoom.room)
+  userRooms: UserRoom[];
 }

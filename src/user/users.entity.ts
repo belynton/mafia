@@ -1,5 +1,5 @@
 import { UserRoom } from 'src/user-room/user-room.entity';
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 
 @Entity()
 export class User {
@@ -13,10 +13,11 @@ export class User {
   password: string;
 
   @Column({
-    name: "avatar_url"
+    name: "avatar_url",
+    nullable: true,
   })
   avatarUrl: string;
 
-  @ManyToOne(() => UserRoom, (UserRoom) => UserRoom.users)
-  users: UserRoom;
+  @OneToMany(() => UserRoom, (userRoom) => userRoom.user)
+  userRooms: UserRoom[];
 }

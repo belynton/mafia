@@ -1,7 +1,7 @@
 import { Role } from 'src/role/role.entity';
 import { Room } from 'src/room/room.entity';
 import { User } from 'src/user/users.entity';
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, OneToMany, OneToOne, PrimaryColumn, JoinColumn } from 'typeorm';
+import { Entity, Column, ManyToOne, PrimaryColumn, JoinColumn } from 'typeorm';
 
 @Entity()
 export class UserRoom {
@@ -12,18 +12,21 @@ export class UserRoom {
   @PrimaryColumn({ name:"user_id" })
   userId: number;
 
-  @Column({ name:"role_id" })
+  @Column({ 
+    name:"role_id",
+    nullable: true,
+  })
   roleId: number;
 
-  @OneToMany(() => User, (user) => user.id)
+  @ManyToOne(() => User, (user) => user.userRooms)
   @JoinColumn({ name: "user_id" })
-  users: User[];  
+  user: User;
 
-  @OneToOne(() => Role, (role) => role.id)
-  @JoinColumn({ name: "role_id" })
-  role: Role;  
-
-  @OneToOne(() => Room, (room) => room.id)
+  @ManyToOne(() => Room, (room) => room.userRooms)
   @JoinColumn({ name: "room_id" })
-  room: Room;  
+  room: Room;
+
+  @ManyToOne(() => Role, (role) => role.userRooms)
+  @JoinColumn({ name: "role_id" })
+  role: Role;
 }
