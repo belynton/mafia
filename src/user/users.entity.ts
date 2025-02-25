@@ -1,16 +1,22 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { UserRoom } from 'src/user-room/user-room.entity';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
 
 @Entity()
 export class User {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column('login')
+  @Column()
   login: string;
 
-  @Column('password')
+  @Column()
   password: string;
 
-  @Column('avatar_url')
+  @Column({
+    name: "avatar_url"
+  })
   avatarUrl: string;
+
+  @ManyToOne(() => UserRoom, (UserRoom) => UserRoom.users)
+  users: UserRoom;
 }

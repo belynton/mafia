@@ -18,6 +18,8 @@ export class Room {
   })
   status: StatusType;
 
-  @Column('player_count')
+  @Column({
+    name: "player_count"
+  })
   playerCount: number;
 }

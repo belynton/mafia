@@ -5,6 +5,6 @@ export class Role {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column('name')
-  status: string;
+  @Column()
+  name: string;
 }
