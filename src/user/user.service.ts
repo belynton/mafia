@@ -17,4 +17,12 @@ export class UserService {
         return await this.usersRepository.save(newUser); 
       }
 
+      async findById(userId: number): Promise<User> {
+        const user = await this.usersRepository.findOne({ where: { id: userId } });
+        if (!user) {
+          throw new Error(`User with id ${userId} not found`);
+        }
+        return user;
+      }
+
 }
