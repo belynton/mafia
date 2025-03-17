@@ -2,8 +2,8 @@ import { UserRoom } from 'src/user-room/user-room.entity';
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 
 export enum StatusType {
-    OPEN = 'USER',
-    CLOSED = 'CHANNEL',
+    OPEN = 'OPEN',
+    CLOSED = 'CLOSED',
     IN_GAME = 'IN_GAME',
   }
 
